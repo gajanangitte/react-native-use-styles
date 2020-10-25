@@ -1,6 +1,6 @@
 import stylesDictionary from "../dictionaries/styles";
 import aliasesDictionary from "../dictionaries/aliases";
-import { hasConstant } from "../utils";
+import { hasConstant, warn } from "../utils";
 import { DEFAULT_SEPARATOR } from "../constants";
 
 export let separator = DEFAULT_SEPARATOR;
@@ -29,12 +29,12 @@ const getKeyFromParts = parts => {
     current = current[part];
 
     if (current === undefined) {
-      if (process.env.NODE_ENV !== "production") {
-        console.warn(
-          `useStyles Invalid-Style-Key: "${part}" is not a valid key for styles. You are seeing this warning because you are in development mode. In a production build there will be no warning.`
-        );
-      }
-
+      warn(
+        current === undefined, 
+        `"${part}" is not a valid key for styles. You are seeing this warning because you are in development mode. In a production build there will be no warning.`,
+        "Invalid-Style-Key"
+      );
+      // return to be executed when current is undefined 
       return;
     }
   }

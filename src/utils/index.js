@@ -27,3 +27,9 @@ export const getPathFromLiteralTag = (strings, expressions) =>
       `${result}${currentString}${expressions[i] ? expressions[i] : ""}`,
     ""
   );
+
+export const warn = (conditional, description, warningKey) => {
+  if (process.env.NODE_ENV !== "production" && conditional) {
+    console.warn(`useStyles${warningKey !== "" ? " "+warningKey : "" }: ${description}`);
+  }
+};
