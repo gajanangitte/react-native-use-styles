@@ -29,7 +29,11 @@ export const getPathFromLiteralTag = (strings, expressions) =>
   );
 
 export const warn = (conditional, description, warningKey) => {
-  if (process.env.NODE_ENV !== "production" && conditional) {
-    console.warn(`useStyles${warningKey !== "" ? " "+warningKey : "" }: ${description}`);
+  if (conditional) {
+    console.warn(
+      `useStyles${
+        warningKey !== "" ? " " + warningKey : ""
+      }: ${description}. You are seeing this warning because you are in development mode. In a production build there will be no warning.`
+    );
   }
 };

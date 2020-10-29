@@ -14,21 +14,18 @@ const processDefinition = definition => {
   const constants = definition.constants;
   const computed = definition.computed;
 
-  if (definition.constant !== undefined) {
-    warn(
-      definition.constant !== undefined,
-      `"constant" key found in styles definition. Maybe you intended to use "constants" instead. You are seeing this warning because you are in development mode. In a production build there will be no warning.`,
-      ``
-    );
-  }
+  warn(
+    definition.constant !== undefined,
+    `"constant" key found in styles definition. Maybe you intended to use "constants" instead`,
+    ``
+  );
 
-  if (definition.computeds !== undefined) {
-    warn(
-      definition.computeds !== undefined,
-      `"computeds" key found in styles definition. Maybe you intended to use "computed" instead. You are seeing this warning because you are in development mode. In a production build there will be no warning.`,
-      ``
-    );
-  }
+  warn(
+    definition.computeds !== undefined,
+    `"computeds" key found in styles definition. Maybe you intended to use "computed" instead`,
+    ``
+  );
+
   definition.constants = null;
   definition.computed = null;
 
@@ -90,18 +87,13 @@ export const getFromCache = (
       isConstant,
       isComputed
     );
-  } else if (
-    process.env.NODE_ENV !== "production" &&
-    namespace &&
-    !globalCache[namespace]
-  ) {
+  } else if (namespace && !globalCache[namespace]){
     warn(
-      !globalCache[namespace],
-      `Namespace "${namespace}" does not exist or has not been imported. You are seeing this warning because you are in development mode. In a production build there will be no warning and these styles will be ignored.`,
+      namespace !== undefined && !globalCache[namespace],
+      `Namespace "${namespace}" does not exist or has not been imported`,
       "Non-Existent-Namespace"
     );
   }
-
   // was not in the namespace, try in the global cache
   if (!value) {
     value = getValueFromStorageObject(
@@ -116,7 +108,7 @@ export const getFromCache = (
   if (!value) {
     warn(
       !value,
-      `${isConstant ? "Constant" : "Style"} "${key}" does not exist. You are seeing this warning because you are in development mode. In a production build there will be no warning and these ${isConstant ? "constants" : "styles"} will be ignored.`,
+      `${isConstant ? "Constant" : "Style"} "${key}" does not exist`,
       `Non-Existent-${isConstant ? "Constant" : "Style"}`
     );
     return;

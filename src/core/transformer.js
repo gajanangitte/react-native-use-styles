@@ -31,7 +31,7 @@ const getKeyFromParts = parts => {
     if (current === undefined) {
       warn(
         current === undefined, 
-        `"${part}" is not a valid key for styles. You are seeing this warning because you are in development mode. In a production build there will be no warning.`,
+        `"${part}" is not a valid key for styles`,
         "Invalid-Style-Key"
       );
       // return to be executed when current is undefined 

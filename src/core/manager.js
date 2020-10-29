@@ -44,7 +44,7 @@ const computePath = (path, namespace, dependencies) => {
   if (!fn) {
     warn(
       !fn,
-      `Computed style "${path}" not found in cache. You are seeing this warning because you are in development mode. In a production build there will be no warning.`,
+      `Computed style "${path}" not found in cache`,
       "Non-Existent-Computed"
     );
 
@@ -104,7 +104,7 @@ export const GlobalStyles = (definition, namespace) => {
 
     warn(
       typeof styles === "function",
-      `Style "${key}" is not valid. Computed styles are placed inside the computed section. You are seeing this warning because you are in development mode. In a production build there will be no warning and these styles will be ignored.`,
+      `Style "${key}" is not valid. Computed styles are placed inside the computed section`,
       "Invalid-Style-Type"
     );
 
