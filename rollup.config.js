@@ -9,8 +9,8 @@ export default {
   output: [{ file: `./cjs/${process.env.NODE_ENV}.js`, format: 'cjs' }],
   plugins: [
     resolve(),
-    strip({
-      functions: ['console.warn']
+    process.env.NODE_ENV === 'production' && strip({
+      functions: ['warn']
     }),
     process.env.NODE_ENV === 'production' && replace({
       'process.env.NODE_ENV': JSON.stringify('production')

@@ -16,14 +16,12 @@ const processDefinition = definition => {
 
   warn(
     definition.constant !== undefined,
-    `"constant" key found in styles definition. Maybe you intended to use "constants" instead`,
-    ``
+    `"constant" key found in styles definition. Maybe you intended to use "constants" instead`
   );
 
   warn(
     definition.computeds !== undefined,
-    `"computeds" key found in styles definition. Maybe you intended to use "computed" instead`,
-    ``
+    `"computeds" key found in styles definition. Maybe you intended to use "computed" instead`
   );
 
   definition.constants = null;
@@ -87,7 +85,11 @@ export const getFromCache = (
       isConstant,
       isComputed
     );
-  } else if (namespace && !globalCache[namespace]){
+  } else if (
+    process.env.NODE_ENV !== "production" &&
+    namespace &&
+    !globalCache[namespace]
+  ) {
     warn(
       namespace !== undefined && !globalCache[namespace],
       `Namespace "${namespace}" does not exist or has not been imported`,
