@@ -1,18 +1,21 @@
-<p align="center"><img src="resources/logo.png" /></p>
+<h1 align="center"><img src="resources/logo.png" /></h1>
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/Naereen/StrapDown.js.svg" />
+  <a href="https://badge.fury.io/js/react-native-use-styles"><img src="https://badge.fury.io/js/react-native-use-styles.svg" alt="npm version" height="18"></a>
   <img src="https://travis-ci.com/rootstrap/react-native-use-styles.svg?branch=main" />
+  <a href="https://codeclimate.com/github/rootstrap/react-native-use-styles/maintainability"><img src="https://api.codeclimate.com/v1/badges/6c949fe1a4afe72b3eeb/maintainability" /></a>
+  <a href="https://codeclimate.com/github/rootstrap/react-native-use-styles/test_coverage"><img src="https://api.codeclimate.com/v1/badges/6c949fe1a4afe72b3eeb/test_coverage" /></a>
+  <img src="https://img.shields.io/github/license/Naereen/StrapDown.js.svg" />
 <p>
 
-#### A classy approach.
+#### A classy approach
 
 Did you ever want to organize your styles properly? This library contains an easy to use API that lets you organize your styles in a classy way.
 
 ## Installation
 
 ```
-npm install react-native-use-styles --save
+npm i react-native-use-styles
 ```
 
 ## Usage
@@ -22,7 +25,7 @@ npm install react-native-use-styles --save
 ```js
 import useStyles from './my-namespaced-styles';
 
-const component = () ⇒ {
+const Component = () ⇒ {
   const s = useStyles();
 
   return (
@@ -40,22 +43,22 @@ Note that we are classy now, and nobody would deny it. Next we'll define our `.g
 `global-styles.js`
 
 ```js
-import { GlobalStyles } from "react-native-use-styles";
+import { GlobalStyles } from 'react-native-use-styles';
 
 GlobalStyles({
-  global: "flex:1 fx:dir:row",
+  global: 'flex:1 fx:dir:row',
 });
 ```
 
 We are using aliases or shortcuts to define our styles. This is equivalent to do:
 
 ```js
-import { GlobalStyles } from "react-native-use-styles";
+import { GlobalStyles } from 'react-native-use-styles';
 
 GlobalStyles({
   global: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
 });
 ```
@@ -65,11 +68,11 @@ GlobalStyles({
 `my-namespaced-styles.js`
 
 ```js
-import { Styles } from "react-native-use-styles";
+import { Styles } from 'react-native-use-styles';
 
 export default Styles({
-  reused: "bg:color:green",
-  namespaced: ".global .reused color:purple",
+  reused: 'bg:color:green',
+  namespaced: '.global .reused color:purple',
 });
 ```
 
@@ -78,14 +81,14 @@ Namespaced styles are a way to isolate a group of styles for a particular part o
 ### Constants
 
 ```js
-import { GlobalStyles } from "react-native-use-styles";
+import { GlobalStyles } from 'react-native-use-styles';
 
 GlobalStyles({
   constants: {
-    purple: "purple",
+    purple: 'purple',
   },
-  path: "color:$purple",
-  object: { color: "$purple" },
+  path: 'color:$purple',
+  object: { color: '$purple' },
 });
 ```
 
@@ -98,7 +101,7 @@ You can define constants in your global or namespaced styles that will be availa
 ```js
 import useStyles from './my-namespaced-styles';
 
-const component = () ⇒ {
+const Component = () ⇒ {
   const isPurple = useState(true);
   const s = useStyles([isPurple]);
 
@@ -129,7 +132,7 @@ If the dependencies change, only styles with a computed in it will be recomputed
 ```js
 import useStyles from './my-namespaced-styles';
 
-const component = () ⇒ {
+const Component = () ⇒ {
   const isPurple = useState(true);
   const s = useStyles();
 
@@ -144,10 +147,10 @@ const component = () ⇒ {
 And a simple style definition as following:
 
 ```js
-import { Styles } from "react-native-use-styles";
+import { Styles } from 'react-native-use-styles';
 
 export default Styles({
-  purple: { color: "purple" },
+  purple: { color: 'purple' },
 });
 ```
 
@@ -160,10 +163,10 @@ You want your global styles to be defined or imported before all the other style
 App.js
 
 ```js
-import "./globalStyles"; // ultra safe zone
-import React from "react";
+import './globalStyles'; // ultra safe zone
+import React from 'react';
 
-import CustomComponent from "./CustomComponent";
+import CustomComponent from './CustomComponent';
 
 export default function App() {
   return <CustomComponent />;

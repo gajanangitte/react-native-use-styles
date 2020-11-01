@@ -1,7 +1,7 @@
-import stylesDictionary from "../dictionaries/styles";
-import aliasesDictionary from "../dictionaries/aliases";
-import { hasConstant, warn } from "../utils";
-import { DEFAULT_SEPARATOR } from "../constants";
+import stylesDictionary from '../dictionaries/styles';
+import aliasesDictionary from '../dictionaries/aliases';
+import { hasConstant, warn } from '../utils';
+import { DEFAULT_SEPARATOR } from '../constants';
 
 export let separator = DEFAULT_SEPARATOR;
 
@@ -30,11 +30,11 @@ const getKeyFromParts = parts => {
 
     if (current === undefined) {
       warn(
-        current === undefined, 
+        current === undefined,
         `"${part}" is not a valid key for styles`,
-        "Invalid-Style-Key"
+        'Invalid-Style-Key',
       );
-      // return to be executed when current is undefined 
+      // return to be executed when current is undefined
       return;
     }
   }
@@ -49,7 +49,7 @@ export default (path, getConstant) => {
   const value = getValueFromParts(parts, getConstant);
 
   return Object.assign(Object.create(null), {
-    [key]: value
+    [key]: value,
   });
 };
 

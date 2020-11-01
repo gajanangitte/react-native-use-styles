@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
-import { GLOBAL_KEY, CONSTANTS_KEY, COMPUTED_KEY } from "../constants";
-import { warn } from "../utils";
+import { StyleSheet } from 'react-native';
+import { GLOBAL_KEY, CONSTANTS_KEY, COMPUTED_KEY } from '../constants';
+import { warn } from '../utils';
 
 let globalCache;
 
@@ -16,12 +16,12 @@ const processDefinition = definition => {
 
   warn(
     definition.constant !== undefined,
-    `"constant" key found in styles definition. Maybe you intended to use "constants" instead`
+    `"constant" key found in styles definition. Maybe you intended to use "constants" instead`,
   );
 
   warn(
     definition.computeds !== undefined,
-    `"computeds" key found in styles definition. Maybe you intended to use "computed" instead`
+    `"computeds" key found in styles definition. Maybe you intended to use "computed" instead`,
   );
 
   definition.constants = null;
@@ -58,7 +58,7 @@ export const setInCache = (definition, namespace) => {
   Object.assign(cache, StyleSheet.create(styles));
   Object.assign(cache, {
     [CONSTANTS_KEY]: constants,
-    [COMPUTED_KEY]: computed
+    [COMPUTED_KEY]: computed,
   });
 };
 
@@ -67,7 +67,7 @@ export const getFromCache = (
   namespace,
   definition,
   isConstant,
-  isComputed
+  isComputed,
 ) => {
   let value;
 
@@ -83,17 +83,17 @@ export const getFromCache = (
       key,
       globalCache[namespace],
       isConstant,
-      isComputed
+      isComputed,
     );
   } else if (
-    process.env.NODE_ENV !== "production" &&
+    process.env.NODE_ENV !== 'production' &&
     namespace &&
     !globalCache[namespace]
   ) {
     warn(
       namespace !== undefined && !globalCache[namespace],
       `Namespace "${namespace}" does not exist or has not been imported`,
-      "Non-Existent-Namespace"
+      'Non-Existent-Namespace',
     );
   }
   // was not in the namespace, try in the global cache
@@ -102,7 +102,7 @@ export const getFromCache = (
       key,
       globalCache[GLOBAL_KEY],
       isConstant,
-      isComputed
+      isComputed,
     );
   }
 
@@ -110,8 +110,8 @@ export const getFromCache = (
   if (!value) {
     warn(
       !value,
-      `${isConstant ? "Constant" : "Style"} "${key}" does not exist`,
-      `Non-Existent-${isConstant ? "Constant" : "Style"}`
+      `${isConstant ? 'Constant' : 'Style'} "${key}" does not exist`,
+      `Non-Existent-${isConstant ? 'Constant' : 'Style'}`,
     );
     return;
   }

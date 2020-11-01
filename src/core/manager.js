@@ -1,5 +1,5 @@
-import transform, { hasPath } from "./transformer";
-import { getFromCache, setInCache } from "./cache";
+import transform, { hasPath } from './transformer';
+import { getFromCache, setInCache } from './cache';
 import {
   hasConstant,
   hasClassName,
@@ -8,16 +8,16 @@ import {
   isNamespace,
   getKeyFromNamespace,
   getNamespace,
-  warn
-} from "../utils";
-import { CONSTANTS_KEY, COMPUTED_KEY } from "../constants";
+  warn,
+} from '../utils';
+import { CONSTANTS_KEY, COMPUTED_KEY } from '../constants';
 
 export const getFromStorage = (
   pKey,
   namespace,
   definition,
   isConstant = false,
-  isComputed = false
+  isComputed = false,
 ) => {
   let space = namespace;
   let key = pKey;
@@ -33,7 +33,7 @@ export const getFromStorage = (
 
 const constantsMutation = (styles, namespace, definition) => {
   for (let [key, value] of Object.entries(styles)) {
-    if (typeof value === "string" && hasConstant(value)) {
+    if (typeof value === 'string' && hasConstant(value)) {
       styles[key] = getFromStorage(value, namespace, definition, true);
     }
   }
@@ -45,7 +45,7 @@ const computePath = (path, namespace, dependencies) => {
     warn(
       !fn,
       `Computed style "${path}" not found in cache`,
-      "Non-Existent-Computed"
+      'Non-Existent-Computed',
     );
 
     return;
@@ -61,7 +61,7 @@ const processStyles = (rawStyles, namespace, dependencies, definition) => {
   // meaning GlobalStyles is being used
   return rawStyles
     .trim()
-    .split(" ")
+    .split(' ')
     .reduce((styles, rawStyle) => {
       let style;
 
@@ -71,7 +71,7 @@ const processStyles = (rawStyles, namespace, dependencies, definition) => {
         style = computePath(rawStyle, namespace, dependencies);
       } else if (hasPath(rawStyle)) {
         style = transform(rawStyle, key =>
-          getFromStorage(key, namespace, definition, true)
+          getFromStorage(key, namespace, definition, true),
         );
       } else {
         return styles;
@@ -87,9 +87,9 @@ export const GlobalUse = (rawStyles, namespace) => {
   return dependencies => {
     let styles = rawStyles;
 
-    if (typeof styles === "string") {
+    if (typeof styles === 'string') {
       styles = processStyles(styles, namespace, dependencies);
-    } else if (typeof styles === "object") {
+    } else if (typeof styles === 'object') {
       constantsMutation(styles, namespace);
     }
 
@@ -103,15 +103,15 @@ export const GlobalStyles = (definition, namespace) => {
     let styles = rawStyles;
 
     warn(
-      typeof styles === "function",
+      typeof styles === 'function',
       `Style "${key}" is not valid. Computed styles are placed inside the computed section`,
-      "Invalid-Style-Type"
+      'Invalid-Style-Type',
     );
 
-    if (typeof styles === "string") {
+    if (typeof styles === 'string') {
       definition[key] = processStyles(styles, namespace, null, definition);
     } else if (
-      typeof styles === "object" &&
+      typeof styles === 'object' &&
       key !== CONSTANTS_KEY &&
       key !== COMPUTED_KEY
     ) {
